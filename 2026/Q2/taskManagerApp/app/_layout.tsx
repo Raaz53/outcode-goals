@@ -6,7 +6,6 @@ import { TaskProvider } from '@/contexts/TaskContext';
 export const unstable_settings = {
   anchor: '(tabs)',
 };
-
 export default function RootLayout() {
   return (
       <TaskProvider>
