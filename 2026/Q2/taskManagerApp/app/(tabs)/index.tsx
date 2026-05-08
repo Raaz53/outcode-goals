@@ -1,7 +1,8 @@
 import { TaskContext } from "@/contexts/TaskContext";
 import { useRouter } from "expo-router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { fetchTasks } from "@/services/api";
 
 export default function HomeScreen(){
   const router = useRouter();
@@ -10,6 +11,19 @@ export default function HomeScreen(){
   const deleteTask = (id: string) => {
     setTasks((prev: any[]) => prev.filter(task => task.id !== id));
   };
+
+  const loadTasks = async () => {
+    try {
+      const data = await fetchTasks();
+      setTasks(data);
+    } catch (error) {
+      console.error('Error fetching tasks:', error);
+    }
+  };
+
+  useEffect(() => {
+    loadTasks();
+  }, []);
 
   return(
     <View style={styles.container}>

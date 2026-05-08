@@ -2,7 +2,7 @@ import { TaskContext } from '@/contexts/TaskContext';
 import { useRouter } from 'expo-router';
 import { useContext, useState } from 'react';
 import { Button, TextInput, View } from 'react-native';
-
+import { createTask } from '@/services/api';
 
 export default function AddTask() {
     const [task, setTask] = useState('');
@@ -10,10 +10,13 @@ export default function AddTask() {
 
     const {setTasks} = useContext(TaskContext);
 
-    const handleSave = () => {
-        setTasks((prev: any[])=>[...prev,{id: Date.now().toString(), title: task}]);
-        router.back();
-    };
+    const handleSave = async() => {
+        const newTask = await createTask(task);
+
+  setTasks((prev: any[]) => [...prev, newTask]);
+
+  router.back();
+       };
 
     return(
         <View>
