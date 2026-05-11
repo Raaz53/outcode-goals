@@ -1,8 +1,8 @@
-import { TaskContext } from '@/contexts/TaskContext';
+import { TaskContext } from '@/src/contexts/TaskContext';
 import { useRouter } from 'expo-router';
 import { useContext, useState } from 'react';
 import { Button, TextInput, View } from 'react-native';
-import { createTask } from '@/services/api';
+import { createTask } from '@/src/services/api';
 
 export default function AddTask() {
     const [task, setTask] = useState('');

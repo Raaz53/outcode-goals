@@ -1,7 +1,7 @@
 import { Stack } from 'expo-router';
 import 'react-native-reanimated';
 
-import { TaskProvider } from '@/contexts/TaskContext';
+import { TaskProvider } from '@/src/contexts/TaskContext';
 
 export const unstable_settings = {
   anchor: '(tabs)',

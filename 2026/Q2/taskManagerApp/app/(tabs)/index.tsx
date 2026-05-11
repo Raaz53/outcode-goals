@@ -1,8 +1,8 @@
-import { TaskContext } from "@/contexts/TaskContext";
+import { TaskContext } from "@/src/contexts/TaskContext";
 import { useRouter } from "expo-router";
 import { useContext, useEffect } from "react";
 import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import { fetchTasks } from "@/services/api";
+import { fetchTasks } from "@/src/services/api";
 
 export default function HomeScreen(){
   const router = useRouter();
