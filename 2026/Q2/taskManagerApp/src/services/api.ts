@@ -1,4 +1,4 @@
-const API_URL = 'http://192.168.10.12:8000/api/tasks/';
+const API_URL = 'http://192.168.10.95:8000/api/tasks/';
 
 
 export async function fetchTasks() {
@@ -13,4 +13,11 @@ export async function createTask(title: string) {
         body: JSON.stringify({title, completed: false}),
     });
     return response.json();
+}
+
+export async function deleteTask(id: number){
+    const response = await fetch('${API_URL}${id}/',);
+    if (!response.ok) {
+        throw new Error('Failed to delete task');
+    }
 }
