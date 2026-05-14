@@ -2,7 +2,7 @@ import { TaskContext } from "@/src/contexts/TaskContext";
 import { useRouter } from "expo-router";
 import { useContext, useEffect, useState } from "react";
 import { Button, FlatList, StyleSheet, Text, TouchableOpacity, View, ActivityIndicator, RefreshControl } from "react-native";
-import { fetchTasks } from "@/src/services/api";
+import { fetchTasks, deleteTaskApi} from "@/src/services/api";
 
 export default function HomeScreen(){
   const router = useRouter();
@@ -10,8 +10,16 @@ export default function HomeScreen(){
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
 
-  const deleteTask = async (id: string) => {
-    setTasks((prev: any[]) => prev.filter(task => task.id !== id));
+  const deleteTask = async (id: string | number) => {
+    try {
+      // call API to delete
+      await deleteTaskApi(id);
+
+      // update local state after successful delete; normalize id types
+      setTasks((prev: any[]) => prev.filter(task => String(task.id) !== String(id)));
+    } catch (err) {
+      console.error('Failed to delete task:', err);
+    }
   };
 
   const onRefresh = async () => {
